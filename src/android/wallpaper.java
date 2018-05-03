@@ -16,13 +16,12 @@ import java.io.InputStream;
 
 public class wallpaper extends CordovaPlugin
 {
-	public Context context = null;
 	private static final boolean IS_AT_LEAST_LOLLIPOP = Build.VERSION.SDK_INT >= 21;
 	
 	@Override
 	public boolean execute(String action, JSONArray args, final CallbackContext callbackContext) throws JSONException
 	{
-		context = IS_AT_LEAST_LOLLIPOP ? cordova.getActivity().getWindow().getContext() : cordova.getActivity().getApplicationContext();
+		final Context context = IS_AT_LEAST_LOLLIPOP ? cordova.getActivity().getWindow().getContext() : cordova.getActivity().getApplicationContext();
 	
 		if (action.equals("start"))
 		{
