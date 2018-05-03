@@ -23,13 +23,11 @@ public class wallpaper extends CordovaPlugin
 	public boolean execute(String action, JSONArray args, final CallbackContext callbackContext) throws JSONException
 	{
 		context = IS_AT_LEAST_LOLLIPOP ? cordova.getActivity().getWindow().getContext() : cordova.getActivity().getApplicationContext();
-		String imgSrc = "";
-		Boolean base64 = false;
-		
+	
 		if (action.equals("start"))
 		{
-			imgSrc = args.getString(0);
-			base64 = args.getBoolean(1);
+			final String imgSrc = args.getString(0);
+			final Boolean base64 = args.getBoolean(1);
 			cordova.getThreadPool().execute(new Runnable() {
 			    public void run() {
 					try
