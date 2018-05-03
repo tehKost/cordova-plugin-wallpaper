@@ -30,10 +30,15 @@ public class wallpaper extends CordovaPlugin
 		{
 			imgSrc = args.getString(0);
 			base64 = args.getBoolean(1);
-			this.echo(imgSrc, base64, context);
-			PluginResult pr = new PluginResult(PluginResult.Status.OK);
-			pr.setKeepCallback(true);
-			callbackContext.sendPluginResult(pr);
+			cordova.getThreadPool().execute(new Runnable() {
+			    public void run() {
+				this.echo(imgSrc, base64, context);
+				callbackContext.success(); // Thread-safe.
+			    }
+			});
+			//PluginResult pr = new PluginResult(PluginResult.Status.OK);
+			//pr.setKeepCallback(true);
+			//callbackContext.sendPluginResult(pr);
 			return true;
 		}
 		callbackContext.error("Set wallpaper is not a supported.");
